@@ -8,9 +8,8 @@ class WebAddressValidator < ActiveModel::EachValidator
   @default_options = { :resolv => :dirty }
   class << self; attr_accessor :default_options; end
 
-  def initialize(options)
-    options.reverse_merge!(self.class.default_options)
-    super(options)
+  def options
+    super.reverse_merge(self.class.default_options)
   end
 
   def validate_each(record, attribute, value)
